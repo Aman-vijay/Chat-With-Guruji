@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# Chat With Guruji
+
+A modern, AI-powered chat web app built with Next.js, React, and TypeScript. Chat with virtual personas of top Indian educators, powered by LLMs and custom persona data in whatsapp style.
+
+## Features
+
+- **Chat with Guruji:** Interact with AI personas modeled after real educators (HITESH SIR & PIYUSH SIR).
+- **Persona System:** Each persona has unique instructions, tone, and training examples.
+- **Streaming Responses:** Real-time, streaming chat powered by OpenAI-compatible APIs.
+- **Modern UI:** Responsive, accessible, and beautiful interface using Tailwind CSS.
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [OpenAI API](https://platform.openai.com/docs/api-reference)
+- [GEMINI API]
+
+## Project Structure
+
+```
+├── app/
+├──api/chat/route       #Api route
+│   └── chat/[id]/      # Dynamic chat pages
+├── components/         # Reusable React components
+│   └── chat/           # Chat UI components
+├── data/               # Persona and instructor data
+├── hooks/              # Custom React hooks
+├── lib/                # API and utility functions
+├── types/              # TypeScript type definitions
+├── public/             # Static assets
+├── package.json        # Project metadata and scripts
+└── README.md           # Project documentation
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+	```sh
+	pnpm install
+	# or
+	npm install
+	```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Set up environment variables:**
+	- Copy `.env.example` to `.env.local` and add your OpenAI-compatible API key:
+	  ```env
+	  GEMINI_API_KEY=your-api-key-here
+	  ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Run the development server:**
+	```sh
+	pnpm dev
+	# or
+	npm run dev
+	```
+	Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding a New Persona
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Edit `data/personas.ts` and add a new persona object.
+2. Optionally, add a matching instructor in `data/instructors.ts`.
+3. The persona will be available for chat instantly.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Pull requests and issues are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
