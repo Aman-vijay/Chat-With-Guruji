@@ -37,20 +37,25 @@ A modern, AI-powered chat web app built with Next.js, React, and TypeScript. Cha
 
 ## Getting Started
 
-1. **Install dependencies:**
+1. **Clone Repository**
+   ```sh
+   git clone https://github.com/Aman-vijay/Chat-With-Guruji.git
+   cd Chat-With-guruji
+   ```
+2.  **Install dependencies:**
 	```sh
 	pnpm install
 	# or
 	npm install
 	```
 
-2. **Set up environment variables:**
+3. **Set up environment variables:**
 	- Copy `.env.example` to `.env.local` and add your OpenAI-compatible API key:
 	  ```env
 	  GEMINI_API_KEY=your-api-key-here
 	  ```
 
-3. **Run the development server:**
+4. **Run the development server:**
 	```sh
 	pnpm dev
 	# or
