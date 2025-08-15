@@ -14,7 +14,7 @@ export default function ChatClient({ instructorId }: { instructorId: string }) {
   const instructor = getInstructorWithPersona(selectedId)!;
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading state for smooth transitions
+
   useEffect(() => {
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 300);
@@ -29,12 +29,12 @@ export default function ChatClient({ instructorId }: { instructorId: string }) {
 
   return (
     <div className="flex h-screen bg-zinc-950 overflow-hidden">
-      {/* Sidebar */}
+
       <Sidebar instructors={instructors} selectedId={selectedId} onSelect={handleSelect} />
       
-      {/* Main chat area */}
+
       <div className="flex-1 flex flex-col min-w-0 relative">
-        {/* Loading overlay */}
+      
         {isLoading && (
           <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm z-50 flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
@@ -49,7 +49,7 @@ export default function ChatClient({ instructorId }: { instructorId: string }) {
           </div>
         )}
         
-        {/* Chat UI */}
+ 
         <div className={`h-full transition-all duration-300 ${isLoading ? 'opacity-50 scale-[0.98]' : 'opacity-100 scale-100'}`}>
           <ChatUi key={selectedId} instructor={instructor} />
         </div>

@@ -23,17 +23,10 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping = false, b
     }
   }, [messages, visibleMessages.length]);
 
-  const formatTime = (timestamp?: Date) => {
-    if (!timestamp) return "";
-    return new Date(timestamp).toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
-  };
 
   return (
     <div className="flex flex-col gap-1 p-6 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
-      {/* Welcome message for empty state */}
+ 
       {messages.length === 0 && (
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center max-w-md mx-auto">
@@ -43,7 +36,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping = false, b
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-zinc-200 mb-2">Start a conversation</h3>
-            <p className="text-zinc-500 text-sm">Ask me anything, and I'll help you learn and grow!</p>
+            <p className="text-zinc-500 text-sm">Ask me anything, and I&apos;ll help you learn and grow!</p>
           </div>
         </div>
       )}
@@ -133,7 +126,6 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping = false, b
               
             </div>
 
-            {/* User avatar */}
             {roleForUI === "user" && (
               <div className="flex-shrink-0 mt-1">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
@@ -147,7 +139,6 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping = false, b
         );
       })}
 
-      {/* Typing indicator */}
       {isTyping && (
         <div className="flex gap-3 justify-start animate-fade-in">
           <div className="flex-shrink-0 mt-1">

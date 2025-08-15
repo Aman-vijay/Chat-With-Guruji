@@ -1,5 +1,6 @@
 import React from "react";
 import type { Instructor } from "@/types/chat";
+import Image from "next/image";
 
 interface PersonaSelectorProps {
 	instructors: Instructor[];
@@ -20,7 +21,7 @@ export default function PersonaSelector({ instructors, selectedId, onSelect }: P
 							${selectedId === inst.id ? "bg-green-600 border-green-500 text-white" : "bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700"}`}
 						style={{ outline: selectedId === inst.id ? "2px solid #22c55e" : undefined }}
 					>
-						<img src={inst.image} alt={inst.name} className="w-7 h-7 rounded-full border border-zinc-700" />
+						<Image src={inst.image} width={28} height={28} alt={inst.name} className="w-7 h-7 rounded-full border border-zinc-700" />
 						<span className="font-medium text-sm">{inst.name}</span>
 					</button>
 				))}

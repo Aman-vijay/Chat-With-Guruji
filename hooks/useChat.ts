@@ -75,8 +75,11 @@ export function useChat(personaId: string) {
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      sendMessage();
+      if (input.trim() && !loading) {
+        sendMessage();
+      }
     }
+   
   }
 
   return {

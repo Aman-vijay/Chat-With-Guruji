@@ -12,8 +12,10 @@ interface ChatUiProps {
 
 export default function ChatUi({ instructor }: ChatUiProps) {
   const instructorKey = instructor.id;
-  const { messages, input, setInput, loading, sendMessage, onKeyDown, bottomRef } =
+  const { messages, input, setInput, loading, sendMessage, bottomRef } =
     useChat(instructorKey);
+  
+  
   
   const [isFocused, setIsFocused] = useState(false);
 
@@ -54,7 +56,7 @@ export default function ChatUi({ instructor }: ChatUiProps) {
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950 text-gray-100 relative overflow-hidden">
-      {/* Animated background elements */}
+ 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-4 w-24 h-24 bg-green-500/5 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-1/4 -right-4 w-32 h-32 bg-blue-500/5 rounded-full blur-xl animate-pulse animation-delay-1000"></div>
@@ -135,9 +137,7 @@ export default function ChatUi({ instructor }: ChatUiProps) {
                 </div>
               </div>
 
-             
-
-              {/* Send button */}
+            
               <button
                 type="submit"
                 disabled={loading || !input.trim()}

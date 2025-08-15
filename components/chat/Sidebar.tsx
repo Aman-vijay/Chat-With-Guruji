@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { Instructor } from "@/types/chat";
+import Image from "next/image";
 
 interface SidebarProps {
   instructors: Instructor[];
@@ -9,7 +10,7 @@ interface SidebarProps {
 
 export default function Sidebar({ instructors, selectedId, onSelect }: SidebarProps) {
   const [expanded, setExpanded] = useState(() => {
-    // Initialize from localStorage if available, otherwise default to true
+   
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('sidebar-expanded');
       return saved !== null ? JSON.parse(saved) : true;
@@ -17,7 +18,7 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
     return true;
   });
 
-  // Persist expanded state to localStorage
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('sidebar-expanded', JSON.stringify(expanded));
@@ -26,7 +27,7 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
 
   return (
     <aside className={`h-full flex flex-col bg-zinc-900 border-r border-zinc-800 transition-all duration-300 ease-in-out ${expanded ? "w-64" : "w-16"}`}>
-      {/* Toggle Button */}
+    
       <div className="flex justify-end p-3">
         <button
           className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600"
@@ -68,9 +69,11 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
           >
             {/* Avatar */}
             <div className="relative flex-shrink-0">
-              <img 
-                src={inst.image} 
-                alt={inst.name} 
+              <Image
+                src={inst.image}
+                width={40}
+                height={40}
+                alt={inst.name}
                 className={`rounded-full border-2 transition-all duration-200 ${
                   selectedId === inst.id 
                     ? "border-green-300/50 shadow-md" 
@@ -82,7 +85,6 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
               )}
             </div>
 
-            {/* Text Content - Only show when expanded */}
             {expanded && (
               <div className="flex-1 min-w-0 text-left">
                 <div className="font-semibold text-sm leading-tight truncate">
@@ -94,12 +96,12 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
               </div>
             )}
 
-            {/* Tooltip for collapsed state */}
+          
             {!expanded && (
               <div className="absolute left-full ml-2 px-3 py-2 bg-zinc-800 text-white text-sm rounded-lg shadow-lg border border-zinc-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
                 <div className="font-semibold">{inst.name}</div>
                 <div className="text-xs text-zinc-400">{inst.title}</div>
-                {/* Tooltip arrow */}
+               
                 <div className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-2 h-2 bg-zinc-800 border-l border-b border-zinc-700 rotate-45"></div>
               </div>
             )}

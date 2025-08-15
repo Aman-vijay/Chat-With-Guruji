@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Image from "next/image";
 export function ChatHeader({ image, name }: { image: string; name: string; }) {
   const [isOnline, setIsOnline] = useState(true);
   const [lastSeen, setLastSeen] = useState("Active now");
@@ -29,9 +29,11 @@ export function ChatHeader({ image, name }: { image: string; name: string; }) {
        
         <div className="relative">
           <div className="size-14 rounded-xl overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-800 border border-zinc-600/50 shadow-xl ring-2 ring-green-500/20 transition-all duration-300 hover:ring-green-500/40 hover:scale-105">
-            <img 
+           <Image
               src={image} 
-              alt={name} 
+              alt={name}
+              width={56}
+              height={56}
               className="object-cover w-full h-full transition-transform duration-300 hover:scale-110" 
             />
           </div>
