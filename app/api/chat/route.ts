@@ -14,9 +14,16 @@ export async function POST(req: NextRequest) {
         "Cache-Control": "no-cache",
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+
+    if (error instanceof Error) {
+      console.error(error);
+      const status = error.message === "Instructor not found" ? 404 : 500;
+      return new Response(error.message, { status });
+    }
+
+ 
     console.error(error);
-    const status = error.message === "Instructor not found" ? 404 : 500;
-    return new Response(error.message || "Error", { status });
+    return new Response("Unknown error", { status: 500 });
   }
 }

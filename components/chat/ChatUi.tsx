@@ -3,16 +3,17 @@
 import { ChatHeader } from "@/components/chat/ChatHeader";
 import MessageList from "@/components/chat/MessageList";
 import { useChat } from "@/hooks/useChat";
-import type { Persona } from "@/types/chat";
+import type { Instructor } from "@/types/chat";
 
 interface ChatUiProps {
-  persona: Persona & { image: string };
+  instructor: Instructor;
+
 }
 
-export default function ChatUi({ persona }: ChatUiProps) {
-  const personaKey = (persona as any).persona_id || persona.id;
+export default function ChatUi({ instructor }: ChatUiProps) {
+  const instructorKey = instructor .id;
   const { messages, input, setInput, loading, sendMessage, onKeyDown, bottomRef } =
-    useChat(personaKey);
+    useChat(instructorKey);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,14 +22,14 @@ export default function ChatUi({ persona }: ChatUiProps) {
 
   return (
     <div className="flex flex-col h-screen bg-[#0d0d0d] text-gray-100">
-      <ChatHeader image={persona.image} name={persona.name} />
+      <ChatHeader image={instructor.image} name={instructor.name} />
 
       <MessageList messages={messages} isTyping={loading} bottomRef={bottomRef} />
 
       <form onSubmit={handleSubmit} className="border-t border-gray-800 p-4 flex gap-2">
         <input
           type="text"
-          placeholder={`Message ${persona.name}...`}
+          placeholder={`Message ${instructor.name}...`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
