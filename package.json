@@ -1,5 +1,5 @@
 {
-  "name": "chat_with_guruji",
+  "name": "chat-with-guruji",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,8 @@
     "openai": "^5.12.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {

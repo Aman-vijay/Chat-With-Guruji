@@ -1,6 +1,8 @@
 import React from "react";
 import TypingIndicator from "./TypingIndicator";
 import type { ChatMessage } from "@/types/chat";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface MessageListProps {
   messages: ChatMessage[];
@@ -25,7 +27,10 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping = false, b
                   ? "bg-[#005c4b] text-white rounded-br-none"
                   : "bg-[#202c33] text-[#e9edef] rounded-bl-none"}`}
             >
-              {msg.content}
+             <ReactMarkdown remarkPlugins={[remarkGfm]} >
+  {msg.content}
+</ReactMarkdown>
+
             </div>
           </div>
         );

@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import type { ChatMessage } from "@/types/chat";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export function useChat(personaId: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
