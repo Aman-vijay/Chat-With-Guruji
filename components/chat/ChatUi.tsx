@@ -41,21 +41,8 @@ export default function ChatUi({ instructor }: ChatUiProps) {
     }
   };
 
-  const quickReplies = [
-    "👋 Hello!",
-    "🤔 Can you explain this?",
-    "💡 Give me an example",
-    "🔍 Tell me more",
-    "✅ Got it, thanks!",
-  ];
-
-  const handleQuickReply = (reply: string) => {
-    setInput(reply);
-    inputRef.current?.focus();
-  };
-
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950 text-gray-100 relative overflow-hidden">
+    <div className="flex flex-col h-screen bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950 text-gray-100 relative overflow-y-auto">
  
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-4 w-24 h-24 bg-green-500/5 rounded-full blur-xl animate-pulse"></div>
@@ -69,24 +56,7 @@ export default function ChatUi({ instructor }: ChatUiProps) {
         <div className="flex-1 relative">
           <MessageList messages={messages} isTyping={loading} bottomRef={bottomRef} />
           
-          {input.trim() === "" && messages.length > 0 && !loading && (
-            <div className="absolute bottom-4 left-6 right-6 z-20">
-              <div className="bg-zinc-900/80 backdrop-blur-xl rounded-xl border border-zinc-700/50 p-3 shadow-2xl animate-fade-in">
-                <p className="text-xs text-zinc-400 mb-2 font-medium">Quick replies:</p>
-                <div className="flex flex-wrap gap-2">
-                  {quickReplies.map((reply, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleQuickReply(reply)}
-                      className="px-3 py-1.5 bg-zinc-800/60 hover:bg-zinc-700/80 border border-zinc-600/30 hover:border-zinc-500/50 rounded-full text-xs text-zinc-300 hover:text-white transition-all duration-200 hover:scale-105"
-                    >
-                      {reply}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+          
         </div>
 
      
