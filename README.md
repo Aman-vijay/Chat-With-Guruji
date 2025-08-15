@@ -17,7 +17,6 @@ A modern, AI-powered chat web app built with Next.js, React, and TypeScript. Cha
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [OpenAI API](https://platform.openai.com/docs/api-reference)
-- [GEMINI API]
 
 ## Project Structure
 
