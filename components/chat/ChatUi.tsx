@@ -5,6 +5,7 @@ import MessageList from "@/components/chat/MessageList";
 import { useChat } from "@/hooks/useChat";
 import type { Instructor } from "@/types/chat";
 import { useState, useRef } from "react";
+import { Trash } from "lucide-react";
 
 interface ChatUiProps {
   instructor: Instructor;
@@ -12,7 +13,7 @@ interface ChatUiProps {
 
 export default function ChatUi({ instructor }: ChatUiProps) {
   const instructorKey = instructor.id;
-  const { messages, input, setInput, loading, sendMessage, bottomRef } =
+  const { messages, input, setInput, loading, sendMessage, clearHistory, bottomRef } =
     useChat(instructorKey);
   
   
@@ -51,8 +52,19 @@ export default function ChatUi({ instructor }: ChatUiProps) {
       </div>
 
       <div className="relative z-10 flex flex-col h-full">
-        <ChatHeader image={instructor.image} name={instructor.name} />
 
+<div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-zinc-900/80 via-zinc-900/60 to-zinc-900/80 backdrop-blur-xl">
+        <ChatHeader image={instructor.image} name={instructor.name} />
+        <button
+          onClick={clearHistory}
+          className="ml-4 px-3 py-1.5 text-xs rounded bg-zinc-800 text-zinc-300 border border-zinc-700 hover:bg-red-600 hover:text-white hover:border-red-500 transition"
+          title="Clear chat history"
+        >
+          <Trash className="w-4 h-4 mr-1 inline" />
+          Clear History
+        </button>
+
+</div>
         <div className="flex-1 relative">
           <MessageList messages={messages} isTyping={loading} bottomRef={bottomRef} />
           

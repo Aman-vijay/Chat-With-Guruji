@@ -3,15 +3,57 @@ import type { ChatMessage } from "@/types/chat";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+
 export function useChat(personaId: string) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  // Load chat history from sessionStorage on mount
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    if (typeof window !== "undefined") {
+      const stored = sessionStorage.getItem(`chat_history_${personaId}`);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch {}
+      }
+    }
+    return [];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
+  // Save chat history to sessionStorage whenever messages change
+  // Sync chat history to sessionStorage and across tabs
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem(`chat_history_${personaId}`, JSON.stringify(messages));
+    }
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, personaId]);
+
+  // Listen for sessionStorage changes in other tabs
+  useEffect(() => {
+    function handleStorage(e: StorageEvent) {
+      if (e.storageArea === sessionStorage && e.key === `chat_history_${personaId}`) {
+        if (e.newValue) {
+          try {
+            setMessages(JSON.parse(e.newValue));
+          } catch {}
+        } else {
+          setMessages([]);
+        }
+      }
+    }
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, [personaId]);
+
+  // Clear chat history for this instructor
+  function clearHistory() {
+    setMessages([]);
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem(`chat_history_${personaId}`);
+    }
+  }
 
   async function sendMessage() {
     if (!input.trim()) return;
@@ -22,7 +64,10 @@ export function useChat(personaId: string) {
       content: input.trim(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    // Use full chat history (including new message) for context
+    const chatHistory = [...messages, userMessage];
+
+    setMessages(chatHistory);
     setInput("");
     setLoading(true);
 
@@ -32,10 +77,7 @@ export function useChat(personaId: string) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           personaId,
-          messages: [...messages, userMessage].map(({ role, content }) => ({
-            role,
-            content,
-          })),
+          messages: chatHistory.map(({ role, content }) => ({ role, content })),
         }),
       });
 
@@ -88,7 +130,7 @@ export function useChat(personaId: string) {
     setInput,
     loading,
     sendMessage,
-    onKeyDown,
+    clearHistory,
     bottomRef,
   };
 }
