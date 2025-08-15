@@ -30,7 +30,7 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
       <div className="flex justify-end p-3">
         <button
           className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600"
-          onClick={() => setExpanded((e) => !e)}
+          onClick={() => setExpanded((e: boolean) => !e)}
           aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
         >
           {expanded ? (
