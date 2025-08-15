@@ -53,7 +53,7 @@ export default function Sidebar({ instructors, selectedId, onSelect }: SidebarPr
       </div>
 
       {/* Instructor List */}
-      <div className="flex-1 px-3 pb-4 space-y-2 overflow-y-auto">
+      <div className="flex-1 px-3 pb-4 space-y-2 ">
         {instructors.map((inst) => (
           <button
             key={inst.id}
